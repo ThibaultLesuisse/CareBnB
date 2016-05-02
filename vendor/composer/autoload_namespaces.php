@@ -17,4 +17,5 @@ return array(
     'Diff' => array($vendorDir . '/phpspec/php-diff/lib'),
     'Cron' => array($vendorDir . '/mtdowling/cron-expression/src'),
     'Cornford\\Googlmapper' => array($vendorDir . '/cornford/googlmapper/src'),
+    'Alexpechkarev\\GoogleGeocoder' => array($vendorDir . '/alexpechkarev/google-geocoder/src'),
 );

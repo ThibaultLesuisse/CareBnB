@@ -137,6 +137,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Cornford\Googlmapper\MapperServiceProvider::class,
+        Alexpechkarev\GoogleGeocoder\GoogleGeocoderServiceProvider::class,
 
         /*
          * Application Service Providers...

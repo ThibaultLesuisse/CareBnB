@@ -21,6 +21,7 @@ class CreateHulpverlenersTable extends Migration
             $table->string('categorie');
             $table->integer('hulpverlener_tijd');
             $table->string('telefoonnummer');
+            $table->string('adres');
             $table->timestamps();
         });
     }

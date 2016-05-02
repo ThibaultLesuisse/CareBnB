@@ -10,7 +10,7 @@ class hulpverleners extends Model
 {
   use Authenticatable;
   protected $table = 'hulpverlener';
-  protected $fillable = array('voornaam', 'achternaam', 'telefoonnummer', 'email', 'wants_updates', 'categorie');
+  protected $fillable = array('voornaam', 'achternaam', 'telefoonnummer', 'email', 'wants_updates', 'categorie', 'adres');
   protected $guarded = array('id', 'created_at', 'updated_at');
 
 
@@ -26,13 +26,15 @@ class hulpverleners extends Model
         'voornaam'  =>  $info['fname'],
         'achternaam'   =>  $info['lname'],
         'email'       =>  $info['email'],
-        'categorie'   => $info['categorie']
+        'categorie'   => $info['categorie'],
+        'adres'       =>$info['adres']
       ),
       array(
         'first_name'  =>  'exists:customers,first_name',
         'last_name'   =>  'exists:customers,last_name',
         'email'       =>  'exists:customers,email',
-        'categorie'   =>  'exists:customers,categorie'
+        'categorie'   =>  'exists:customers,categorie',
+        'adres'       =>  'exists:customers,adres'
       )
     );
 

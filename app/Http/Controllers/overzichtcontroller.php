@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use DB;
 use Auth;
 use Mapper;
+use \Geocoder;
 
 class overzichtcontroller extends Controller
 {
@@ -21,12 +22,18 @@ class overzichtcontroller extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   $hulpverleners = DB::table('hulpverlener')->get();
-        Mapper::map(51, 4);
-        Mapper::marker(50.981128999999990000, 4.5);
-        Mapper::marker(51.281128999999990000, 4.8);
-        Mapper::marker(51.181128999999990000, 4.0);
-        Mapper::location('Aalst');
+    {
+    $hulpverleners = DB::table('hulpverlener')->get();
+    Mapper::map(51, 4);
+
+    foreach ($hulpverleners as $hulpverlener) {
+    $param = array("address"=>$hulpverlener->adres);
+    $response = \Geocoder::geocode('json', $param);
+    $array = array(json_decode($response, true));
+    Mapper::marker($array[0]['results'][0]['geometry']['location']['lat'] ,$array[0]['results'][0]['geometry']['location']['lng'],  ['draggable' => true, 'eventMouseDown' => " document.getElementById('$hulpverlener->id').style.color = 'red';".PHP_EOL, 'eventMouseUp' => " document.getElementById('$hulpverlener->id').style.color = '';".PHP_EOL]);
+
+}
+
         return view('overzicht', compact('hulpverleners'));
     }
 
@@ -73,7 +80,7 @@ class overzichtcontroller extends Controller
         //
     }
 
-  
+
     public function update(Request $request, $id)
     {
         //
