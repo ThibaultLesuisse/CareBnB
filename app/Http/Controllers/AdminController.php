@@ -7,11 +7,13 @@ use App\Models\Customer;
 use App\Models\Configuration;
 use App\Models\TimeInterval;
 
+use App\hulpverleners;
+
 use Input;
 use Auth;
 use View;
 class AdminController extends Controller {
-  
+
   /**
    * Function to retrieve the index page
    */
@@ -20,14 +22,14 @@ class AdminController extends Controller {
     $errors = "None";
     return view('admin/login')->with('errors', $errors);
   }
-  
+
   /**
    * Function to attempt authorization, and redirect to admin page if successful, redirect to login with errors if not
    */
   public function login()
   {
     $input = Input::all();
-    if (Auth::attempt(array('username' => $input['username'], 'password' => $input['password'] ))) {
+    if (Auth::attempt(array('name' => $input['username'], 'password' => $input['password'] ))) {
       return redirect('admin/appointments');
     } else {
       $errors = "Invalid username or password";
@@ -53,11 +55,11 @@ class AdminController extends Controller {
 
   /**
    * View function for list of packages
-   * @return view 
+   * @return view
    */
   public function packages() {
-    $packages = Package::all();
-    return view('admin/packages/index', ['packages' => $packages]);
+    $hulpverleners = hulpverleners::all();
+    return view('admin/packages/index', ['hulpverleners' => $hulpverleners]);
   }
 
   /**

@@ -63,6 +63,7 @@
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/') }}">Home</a></li>
                     <li><a href="{{ url('overzicht') }}">Overzicht</a></li>
+                    <li><a href="{{ url('admin') }}">Admin</a></li>
                     <li><a href="{{ url('help') }}">Help</a></li>
                 </ul>
 
@@ -75,7 +76,7 @@
                     @else
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                {{ Auth::user()->name }} <span class="caret"></span>
+                                {{ Auth::user()->name }} {{ Auth::user()->lastname }}  <span class="caret"></span>
                             </a>
 
 

@@ -2,7 +2,7 @@
 @section('content')
 <div class="container">
 	<div class="row">
-		<legend>Packages</legend>
+		<legend>Hulpverleners</legend>
 		<table class="table table-striped table-hover">
 			<thead>
 				<tr>
@@ -14,12 +14,12 @@
 				</tr>
 			</thead>
 			<tbody>
-				@foreach($packages as $p)
+				@foreach($hulpverleners as $h)
 				<tr>
-					<td>{{ $p->package_name }}</td>
-					<td>{{ '$'.$p->package_price }}</td>
-					<td>{{ $p->package_time.' hours' }}</td>
-					<td>{{ $p->package_description }}</td>
+					<td>{{ $h->voornaam }}</td>
+					<td>{{ $h->achternaam }}</td>
+					<td>{{ $h->hulpverlener_tijd.' hours' }}</td>
+					<td>{{ $h->adres }}</td>
 					<td><a href="{{ url('admin/edit-package/'.$p->id) }}" class="btn btn-primary">Edit</a></td>
 				</tr>
 				@endforeach

@@ -44,19 +44,21 @@ class hulpverleners extends Model
     // We stil create a new user for them in the database.
     if ($validator->fails()) {
       // Registering the new user
-      return Customer::create(array(
-        'first_name'  =>  $info['fname'],
-        'last_name'   =>  $info['lname'],
-        'contact_number' => $info['number'],
+      return hulpverleners::create(array(
+        'voornaam'  =>  $info['fname'],
+        'achternaam'   =>  $info['lname'],
+        'telefoonnummer' => $info['number'],
         'email'       =>  $info['email'],
+        'categorie'       =>  $info['categorie'],
+        'adres'       =>  $info['adres'],
         'wants_updates' => Session::get('updates')
         ))->id;
     } else {
-      return Customer::where('email', $info['email'])->pluck('id');
+      return hulpverleners::where('email', $info['email'])->pluck('id');
     }
 
   }
-
+  
 
     //
 }

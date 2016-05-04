@@ -18,7 +18,7 @@
   <div class="containter fill">
 @foreach($hulpverleners as $hulpverlener)
 
-<div class="panel-default" id="{{$hulpverlener->id}}">
+<div class="panel-primary" id="{{$hulpverlener->id}}">
   <div class="panel-heading">Afspraak maken met {{$hulpverlener->voornaam}}</div>
     <div class="panel-body">
       <div class="row">
@@ -28,8 +28,11 @@
       Email:  {{$hulpverlener->email}}<br>
       Categorie:  {{$hulpverlener->categorie}}<br>
     </div>
+
   </div>
-    <a href="booking/calendar/{{$hulpverlener->id}} ">Maak afspraak</a>
+  <br>
+
+    <a href="booking/calendar/{{$hulpverlener->id}} "  class="btn btn-default  col-md-6 col-lg-6 col-md-offset-3 col-lg-offset-3">Maak afspraak</a>
   </div>
 </div>
 @endforeach

@@ -8,7 +8,7 @@ $(document).ready(function() {
     editable: false,
     header: {
       left: 'prev,next today',
-      center: 'Appointments',
+      center: 'Afspraken',
       right: 'month, agendaWeek, agendaDay'
     },
     defaultDate: cDate,
@@ -17,19 +17,19 @@ $(document).ready(function() {
     events: {
       url: url+'/api/get-all-appointments',
       error: function() {
-        $('#error').html('Could not find any appointments');
+        $('#error').html('Geen afspraken gevonden');
       }
     },
-    
+
     // Function to handle a day click event
     dayClick: function(date, jsEvent, view) {
       //$(this).css('background-color', 'red');
     },
-    
+
     // Function to handle an event click event
     eventClick: function(calEvent, jsEvent, view) {
       var detailView = $('#appointment-details');
-      $.get(url+"/api/get-appointment-info/"+calEvent.id, 
+      $.get(url+"/api/get-appointment-info/"+calEvent.id,
         function(data) {
           var start = moment(calEvent.start).format('YYYY-MM-DD [at] h:mm a');
           var end = moment(calEvent.end).format('YYYY-MM-DD [at] h:mm a');

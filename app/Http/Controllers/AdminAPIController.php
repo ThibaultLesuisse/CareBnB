@@ -14,6 +14,8 @@ use App\Models\Appointment;
 use App\Models\Customer;
 use App\Models\BookingDateTime;
 use App\Models\Package;
+use App\User;
+use App\hulpverleners;
 use App\Models\Configuration;
 
 class AdminAPIController extends Controller
@@ -34,18 +36,18 @@ class AdminAPIController extends Controller
 		$calendarAppointments = array();
 		foreach($appointments as $a) {
 
-			$user = User::find($a['customer_id']);
-			$customer = $user->name;
+			$user = User::find($a['appointment_type']);
+			$naam = $user->name;
 
-			$package = Package::find($a['appointment_type']);
+			$hulpverleners = hulpverleners::find($a['appointment_type']);
 
 			$startDate = date_create($a['appointment_datetime']);
 			$endDate = date_create($a['appointment_datetime']);
-			$time = (string)$package->package_time.' hours';
+			$time = (string)$hulpverleners->$hulpverlener_tijd.' hours';
 			$endDate = date_add($endDate, date_interval_create_from_date_string($time));
 			$event = array(
 				'id' => $a['id'],
-				'title' => 'Appointment with '.$customer,
+				'title' => 'Appointment with '.$naam,
 				'start' => $startDate->format('Y-m-d\TH:i:s'),
 				'end' => $endDate->format('Y-m-d\TH:i:s'),
 			);
