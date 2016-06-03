@@ -29,7 +29,7 @@ class AdminController extends Controller {
   public function login()
   {
     $input = Input::all();
-    if (Auth::attempt(array('name' => $input['username'], 'password' => $input['password'] ))) {
+    if (Auth::attempt(array('email' => $input['username'], 'password' => $input['password'] ))) {
       return redirect('admin/appointments');
     } else {
       $errors = "Invalid username or password";
