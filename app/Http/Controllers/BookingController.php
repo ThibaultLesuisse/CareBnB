@@ -10,12 +10,10 @@ use Session;
 use DB;
 use DateTime;
 
-// Declare Models to be used
-use App\Models\Package;
-use App\Models\Customer;
 use App\Models\Appointment;
 use App\Models\BookingDateTime;
-use App\hulpverleners;
+use App\Models\Hulpverleners;
+use App\Models\User;
 
 
 class BookingController extends Controller
@@ -28,8 +26,7 @@ class BookingController extends Controller
 */
  public function getIndex()
  {
-   $packages = Package::all();
-   return view('index/index', ['packages' => $packages]);
+   return view('index/index');
  }
 
   /**
@@ -40,12 +37,13 @@ class BookingController extends Controller
   public function getCalendar($hid)
   {
 
-    //Add package to the session data
-    Session::put('hulpverlener_id', $hid);
-    $hulpverlener = hulpverleners::find($hid);
+
+    $hulpverlener = User::find($hid);
+    Session::put('userID', $hid);
     // This groups all booking times by date so we can give a list of all days available.
     $data = [
-    'hulpverlenerNaam' => $hulpverlener->voornaam,
+    'hulpverlenerNaam' => $hulpverlener->name,
+    'hulpverlenerAchterNaam' => $hulpverlener->lastname,
     'days' => BookingDateTime::all()
     ];
 
@@ -61,7 +59,7 @@ class BookingController extends Controller
 
     // Put the passed date time ID into the session
     Session::put('aptID', $aptID);
-    $hulpverlener = hulpverleners::find(Session::get('hulpverlener_id'));
+    $hulpverlener = User::find(Session::get('userID'));
 
     // Get row of date id
     $dateRow = BookingDateTime::find($aptID);
@@ -71,7 +69,7 @@ class BookingController extends Controller
 
     $data = [
     'hid' => Session::get('hulpverlener_id'),
-    'hulpverlenerNaam' => $hulpverlener->voornaam,
+    'hulpverlenerNaam' => $hulpverlener->name,
     'dateRow'   => $dateRow,
     'dateFormat' => $dateFormat,
     'aptID' =>  $aptID,
@@ -168,17 +166,9 @@ class BookingController extends Controller
   public function getTimes()
   {
 
-    // We get the data from AJAX for the day selected, then we get all available times for that day
+
     $selectedDay = Input::get('selectedDay');
-    $availableTimes = DB::table('booking_datetimes')->get();
-
-    // We will now create an array of all booking datetimes that belong to the selected day
-    // WE WILL NOT filter this in the query because we want to maintain compatibility with every database (ideally)
-
-    // PSEUDO CODE
-    // Get package duration of the chosen package
-    $hulpverlener = hulpverleners::find(Session::get('hulpverlener_id'));
-    $hulpverlenerTijd = $hulpverlener->hulpverlener_tijd;
+    $availableTimes = BookingDateTime::where('userID', Session::get('userID'))->get();
 
     // For each available time...
     foreach($availableTimes as $t => $value) {
@@ -186,7 +176,7 @@ class BookingController extends Controller
       $startTime = new DateTime($value->booking_datetime);
       if ($startTime->format("Y-m-d") == $selectedDay) {
         $endTime = new DateTime($value->booking_datetime);
-        date_add($endTime, date_interval_create_from_date_string($hulpverlenerTijd.' hours'));
+        date_add($endTime, date_interval_create_from_date_string('3600 seconds'));
 
         // Try to grab any appointments between the start time and end time
         $result = Appointment::timeBetween($startTime->format("Y-m-d H:i"), $endTime->format("Y-m-d H:i"));

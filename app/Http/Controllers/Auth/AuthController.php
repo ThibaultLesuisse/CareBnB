@@ -1,12 +1,13 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-
-use App\User;
+use Auth;
+use App\Models\User;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Session;
 
 class AuthController extends Controller
 {
@@ -23,6 +24,8 @@ class AuthController extends Controller
 
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
+
+    protected $redirectTo = '/';
     /**
      * Create a new authentication controller instance.
      *
@@ -46,6 +49,10 @@ class AuthController extends Controller
             'lastname' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|confirmed|min:6',
+            'type' => 'required',
+            'categorie' => 'required',
+            'telefoonnummer' => 'required',
+            'adres' => 'required'
         ]);
     }
 
@@ -62,6 +69,12 @@ class AuthController extends Controller
             'lastname' => $data['lastname'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'type' => $data['type'],
+            'categorie' => $data['categorie'],
+            'telefoonnummer' => $data['telefoonnummer'],
+            'adres' => $data['adres']
+
         ]);
     }
+
 }

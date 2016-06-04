@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
@@ -24,7 +24,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      *
      * @var array
      */
-    protected $fillable = ['name','lastname' , 'email', 'password', 'type'];
+    protected $fillable = ['name','lastname' , 'email', 'password', 'type', 'categorie', 'telefoonnummer', 'adres'];
 
     /**
      * The attributes excluded from the model's JSON form.

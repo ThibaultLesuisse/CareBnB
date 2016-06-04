@@ -7,35 +7,32 @@ use App\Models\Customer;
 use App\Models\Configuration;
 use App\Models\TimeInterval;
 
-use App\hulpverleners;
+use App\Models\Hulpverleners;
 
 use Input;
 use Auth;
 use View;
 class AdminController extends Controller {
 
+
+  public function __construct()
+	{
+		$this->middleware('auth');
+    $this->middleware('hulpverlener');
+	}
   /**
    * Function to retrieve the index page
    */
   public function index()
   {
-    $errors = "None";
-    return view('admin/login')->with('errors', $errors);
+
+    return view('admin/appointments');
   }
 
   /**
    * Function to attempt authorization, and redirect to admin page if successful, redirect to login with errors if not
    */
-  public function login()
-  {
-    $input = Input::all();
-    if (Auth::attempt(array('email' => $input['username'], 'password' => $input['password'] ))) {
-      return redirect('admin/appointments');
-    } else {
-      $errors = "Invalid username or password";
-      return view('admin/login')->with('errors', $errors);
-    }
-  }
+
 
   public function appointments()
   {

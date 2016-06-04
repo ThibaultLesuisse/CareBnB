@@ -50,20 +50,53 @@
                                 @endif
                             </div>
                         </div>
+                        <div class="form-group{{ $errors->has('categorie') ? ' has-error' : '' }}">
+                            <label class="col-md-4 control-label">Categorie</label>
+
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="categorie" value="{{ old('categorie') }}">
+
+                                @if ($errors->has('categorie'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('categorie') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-group{{ $errors->has('telefoonnummer') ? ' has-error' : '' }}">
+                            <label class="col-md-4 control-label">Telefoonnummer</label>
+
+                            <div class="col-md-6">
+                                <input type="number" class="form-control" name="telefoonnummer" value="{{ old('telefoonnummer') }}">
+
+                                @if ($errors->has('telefoonnummer'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('telefoonnummer') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-group{{ $errors->has('adres') ? ' has-error' : '' }}">
+                            <label class="col-md-4 control-label">Adres</label>
+
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="adres" value="{{ old('adres') }}">
+
+                                @if ($errors->has('adres'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('adres') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
                         <div class="form-group {{ $errors->has('type') ? ' has-error' : '' }}">
+                            <label class="col-md-4 control-label">Kies type</label>
 
-    <div class="col-sm-offset-4 col-sm-10">
-                                <div class="radio">
-                                    <label>
-                                        <input type="radio" name="hulpverlener" value="{{ old('type') }}">Hulpverlener
-                                    </label>
-                                  </div>
-                                  <div class="radio">
-                                      <label>
-                                            <input type="radio" name="hulpbehoevende" value="{{ old('type') }}">Hulpbehoevende
-                                      </label>
-                                    </div>
-
+                              <div class="col-md-6">
+                                    <select class="form-control" name="type" value="{{ old('type') }}">
+                                              <option>Hulpverlener</option>
+                                              <option>Hulpbehoevende</option>
+                                    </select>
 
                                 @if ($errors->has('type'))
                                     <span class="help-block">
@@ -71,7 +104,7 @@
                                     </span>
                                 @endif
                             </div>
-                        </div>
+                          </div>
 
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                             <label class="col-md-4 control-label">Wachtwoord</label>

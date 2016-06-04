@@ -32,22 +32,15 @@ class AdminAPIController extends Controller
 	 */
 	public function GetAllAppointments()
 	{
-		$appointments = Appointment::all();
+		$appointments = Appointment::where('userID', auth()->user()->id)->get();
 		$calendarAppointments = array();
 		foreach($appointments as $a) {
-
-			$user = User::find($a['appointment_type']);
-			$naam = $user->name;
-
-			$hulpverleners = hulpverleners::find($a['appointment_type']);
-
 			$startDate = date_create($a['appointment_datetime']);
 			$endDate = date_create($a['appointment_datetime']);
-			$time = (string)$hulpverleners->$hulpverlener_tijd.' hours';
-			$endDate = date_add($endDate, date_interval_create_from_date_string($time));
+			$endDate = date_add($endDate, date_interval_create_from_date_string('1800 seconds'));
 			$event = array(
 				'id' => $a['id'],
-				'title' => 'Appointment with '.$naam,
+				'title' => 'Appointment with '.auth()->user()->name,
 				'start' => $startDate->format('Y-m-d\TH:i:s'),
 				'end' => $endDate->format('Y-m-d\TH:i:s'),
 			);
@@ -59,7 +52,7 @@ class AdminAPIController extends Controller
 
 	public function GetAppointmentInfo($id)
 	{
-		$appointment = Appointment::with('customer')->find($id);
+		$appointment = Appointment::where('id', $id)->get();
 		return response()->json($appointment);
 	}
 
@@ -67,16 +60,10 @@ class AdminAPIController extends Controller
 	{
 		$times = BookingDateTime::all();
 		$availability = array();
-		$configs = Configuration::with('timeInterval')->first();
 		foreach($times as $t) {
 			$startDate = date_create($t['booking_datetime']);
 			$endDate = date_create($t['booking_datetime']);
-
-			// Get configuration variable
-			// @todo default metric is minutes and only one supported
-			// change to whichever metrics we support in the future
-			$timeToAdd = $configs->timeInterval->interval; //minutes
-			$endDate = $endDate->add(new \DateInterval('PT'.$timeToAdd.'M'));
+			$endDate = date_add($endDate, date_interval_create_from_date_string('1800 seconds'));
 			$event = [
 				'id' => $t['id'],
 				'title' => 'Available',
@@ -98,9 +85,7 @@ class AdminAPIController extends Controller
 	 * @return  response()->json() - description of events
 	 */
 	public function SetAvailability()
-	{
-		$post = Input::all();
-		$configs = Configuration::with('timeInterval')->first();
+	{$post = Input::all();
 
 		// Creating our datetime variables
 		$startDate = new \DateTime($post['start']);
@@ -111,17 +96,28 @@ class AdminAPIController extends Controller
 		// configuration interval variables between start and end
 		while($intervalDate < $endDate) {
 			$intervalDateEnd = new \DateTime($intervalDate->format('Y-m-d H:i:s'));
-			$intervalDateEnd->add(new \DateInterval('PT'.$configs->timeInterval->interval.'M'));
+			$intervalDateEnd->add(new \DateInterval('PT'.'30'.'M'));
 
 			// We check to make sure we are not overlapping existing availability
 			if (BookingDateTime::timeBetween($intervalDate, $intervalDateEnd)->first()) {
 				return response()->json("Segment overlaps with existing availability", 500);
 			} else {
-				BookingDateTime::addAvailability($intervalDate);
-				$intervalDate->add(new \DateInterval('PT'.$configs->timeInterval->interval.'M'));
+				BookingDateTime::addAvailability($intervalDate, auth()->user()->id );
+				$intervalDate->add(new \DateInterval('PT'.'30'.'M'));
 			}
 		}
 
+		return response()->json('success', 200);
+	}
+	/**
+	 * verwijderd event
+	 * @param $id -event id
+	 *
+	 * @return  response()->json() - description of events
+	 */
+	public function DeleteAppointment()
+	{$post = Input::all();
+		Appointment::destroy($post['id']);
 		return response()->json('success', 200);
 	}
 }

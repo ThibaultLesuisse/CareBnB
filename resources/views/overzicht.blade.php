@@ -10,7 +10,7 @@
     {!! Mapper::render() !!}
 
   </div>
-  <div style="padding-left:58%; margin-top:2%;overflow:auto; height:800px;">
+  <div style="padding-left:58%; margin-top:2%;overflow:auto; height:90%;">
 
 
   <h2 style="padding-left:2%;text-align:center;font-family:lato;">Selecteer uw hulpverlener</h2>
@@ -19,7 +19,7 @@
 @foreach($hulpverleners as $hulpverlener)
 
 <div class="panel-primary" id="{{$hulpverlener->id}}">
-  <div class="panel-heading">Afspraak maken met {{$hulpverlener->voornaam}}</div>
+  <div class="panel-heading">Afspraak maken met {{$hulpverlener->name}}</div>
     <div class="panel-body">
       <div class="row">
       <img src="/assets/img/{{$hulpverlener->id}}.jpg" alt="foto" class="img-thumbnail col-md-2 col-lg-2" height="80px" width="60px">

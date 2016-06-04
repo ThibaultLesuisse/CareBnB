@@ -12,7 +12,7 @@ class Appointment extends Model implements AuthenticatableContract{
     use authenticatable;
 
   	protected $table = 'appointments';
-    protected $fillable = array('customer_id', 'appointment_type', 'appointment_datetime');
+    protected $fillable = array('userID', 'appointment_type', 'appointment_datetime');
     protected $guarded = array('id', 'created_at', 'updated_at');
 
     /**
@@ -21,13 +21,13 @@ class Appointment extends Model implements AuthenticatableContract{
      */
     public function customer()
     {
-      return $this->hasOne('App\models\Customer', 'id', 'customer_id');
+      return $this->hasOne('App\models\Customer', 'id', 'userID');
     }
 
-    public static function addAppointment($customerID) {
+    public static function addAppointment($userID) {
       $info = Session::get('appointmentInfo');
       Appointment::create(array(
-        'customer_id'  => $customerID,
+        'userID'  => $userID,
         'appointment_type'  =>  $info['hid'],
         'appointment_datetime'  =>  $info['datetime']
       ));
@@ -36,5 +36,9 @@ class Appointment extends Model implements AuthenticatableContract{
     public function scopeTimeBetween($query, $begin, $end) {
       //return $query->whereBetween('appointment_datetime', array($begin, $end));
       return $query->where('appointment_datetime', '>', $begin)->where('appointment_datetime', '<', $end);
+    }
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
     }
 }

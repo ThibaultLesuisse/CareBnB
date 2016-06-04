@@ -1,7 +1,7 @@
 <?php
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
-use App\hulpverleners;
+use App\Models\Hulpverleners;
 
 class HulpverlenerSeeder extends Seeder {
 
@@ -10,7 +10,7 @@ class HulpverlenerSeeder extends Seeder {
 
     Eloquent::unguard();
 
-    hulpverleners::create(array(
+    Hulpverleners::create(array(
       'voornaam' => 'Thibault',
       'achternaam' => 'Lesuisse',
       'telefoonnummer' => '047452134',
@@ -19,7 +19,7 @@ class HulpverlenerSeeder extends Seeder {
       'adres' => 'Hogeweg 69 Erembodegem'
     ));
 
-    hulpverleners::create(array(
+    Hulpverleners::create(array(
       'voornaam' => 'Patrick',
       'achternaam' => 'LeGrand',
       'telefoonnummer' => '0474195602',
@@ -27,7 +27,7 @@ class HulpverlenerSeeder extends Seeder {
       'categorie' => "Kinesist",
       'adres' => 'Engelstraat Aalst Belgie'
     ));
-    hulpverleners::create(array(
+    Hulpverleners::create(array(
       'voornaam' => 'Fiona',
       'achternaam' => 'Van Rassum',
       'telefoonnummer' => '04742548602',
@@ -35,7 +35,7 @@ class HulpverlenerSeeder extends Seeder {
       'categorie' => "Podoloog",
       'adres' => 'Gudstraat Aalst Belgie'
     ));
-    hulpverleners::create(array(
+    Hulpverleners::create(array(
       'voornaam' => 'Marion',
       'achternaam' => 'De Beurder',
       'telefoonnummer' => '04745488602',
@@ -43,7 +43,7 @@ class HulpverlenerSeeder extends Seeder {
       'categorie' => "Verplegeester",
       'adres' => 'Ukkel Sint-Jobsesteenweg 93'
     ));
-    hulpverleners::create(array(
+    Hulpverleners::create(array(
       'voornaam' => 'Geoffrey',
       'achternaam' => 'Van den Bossche',
       'telefoonnummer' => '04745548602',

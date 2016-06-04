@@ -1,15 +1,12 @@
 var url = document.getElementById("url").textContent;
 var jdays = [];
 cDate = moment();
-$('#currentDate').text("Current Date is " + cDate.format("MMMM Do, YYYY") );
+$('#currentDate').text("Vandaag zijn we " + cDate.format("MMMM Do, YYYY") );
 
 $(document).ready(function($){
 	createCalendar();
 });
-
-/**
- * Instantiates the calendar AFTER ajax call
- */
+// Opvragen van de data beschikbaar
 function createCalendar()
 {
 	$.get(url+"/api/get-available-days", function(data) {
@@ -17,7 +14,6 @@ function createCalendar()
 			jdays.push(value.booking_datetime);
 		});
 
-		//My function to intialize the datepicker
 		$('#calendar').datepicker({
 			inline: true,
 			minDate: 0,
@@ -52,7 +48,7 @@ function highlightDays(date)
 function getTimes(d)
 {
 	var dateSelected = moment(d);
-	document.getElementById('daySelect').innerHTML = dateSelected.format("MMMM Do, YYYY");
+	document.getElementById('daySelect').innerHTML = dateSelected.format("Do MMMM , YYYY");
 	$.get(url+"/booking/times?selectedDay="+d, function(data) {
 		$('#dayTimes').empty();
 		$('#dayTimes').append('<h6>Uren vrij</h6>');

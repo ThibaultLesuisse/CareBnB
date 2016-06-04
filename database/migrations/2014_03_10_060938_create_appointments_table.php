@@ -15,7 +15,7 @@ class CreateAppointmentsTable extends Migration {
 		//
      Schema::create('appointments', function($table) {
       	$table->increments('id');
-        $table->integer('customer_id');
+        $table->integer('userID');
         $table->integer('appointment_type');
         $table->datetime('appointment_datetime');
         $table->timestamps();

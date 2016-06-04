@@ -9,12 +9,14 @@ use DB;
 use Auth;
 use Mapper;
 use \Geocoder;
+use Session;
 
 class overzichtcontroller extends Controller
 {
   public function __construct()
 	{
 		$this->middleware('auth');
+    $this->middleware('hulpbehoevende');
 	}
     /**
      * Display a listing of the resource.
@@ -23,7 +25,15 @@ class overzichtcontroller extends Controller
      */
     public function index()
     {
-    $hulpverleners = DB::table('hulpverlener')->get();
+    $users = DB::table('users')->get();
+    $hulpverleners = array();
+    foreach ($users as $user ) {
+      if($user->type == "Hulpverlener"){
+      array_push($hulpverleners,$user);
+      }
+    }
+    Session::put('hulpverleners', $hulpverleners);
+
     Mapper::map(51, 4);
 
     foreach ($hulpverleners as $hulpverlener) {

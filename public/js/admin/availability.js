@@ -8,9 +8,10 @@ $(document).ready(function() {
   // Calendar initialization
   $('#calendar').fullCalendar({
     editable: false,
+    theme: true,
     header: {
       left: 'prev,next today',
-      center: 'Appointments',
+      center: 'Afspraken',
       right: 'month, agendaWeek, agendaDay'
     },
     defaultDate: cDate,
@@ -20,14 +21,13 @@ $(document).ready(function() {
      success: function(e) {
      },
      error: function() {
-      $('#error').html('There was an error retrieiving Availability.');
-     } 
+      $('#error').html('Beschikbaarheid niet beschikbaar');
+     }
     },
     selectable: true,
     select: function(start, end) {
-      var title = confirm('Are you sure you want to set this availability?');
+      var title = confirm('Zeker van de beschikbaarheid om '+ start.toString() + ' Tot: '+ end.toString());
       var eventData;
-      // Save it to DB and show
       if (title) {
 
         eventData = {

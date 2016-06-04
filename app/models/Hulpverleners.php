@@ -1,12 +1,12 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 
-class hulpverleners extends Model
+class Hulpverleners extends Model
 {
   use Authenticatable;
   protected $table = 'hulpverlener';
@@ -58,7 +58,7 @@ class hulpverleners extends Model
     }
 
   }
-  
+
 
     //
 }

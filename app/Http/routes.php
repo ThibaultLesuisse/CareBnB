@@ -21,14 +21,13 @@ Route::group(['prefix' => 'api'], function()
 	Route::get('get-appointment-info/{id}', 'AdminAPIController@GetAppointmentInfo');
 	Route::get('get-all-availability', 'AdminAPIController@GetAllAvailability');
 	Route::any('set-availability', 'AdminAPIController@SetAvailability');
+	Route::any('delete-appointment', 'AdminAPIController@DeleteAppointment');
 });
 
 // Admin Routes
 Route::group(['prefix' => 'admin'], function()
 {
 	Route::get('/', 'AdminController@index');
-	Route::any('login', 'AdminController@login');
-
 	// Appointment Routes
 	Route::get('appointments', 'AdminController@appointments');
 

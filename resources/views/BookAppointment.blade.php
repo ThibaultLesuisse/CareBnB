@@ -3,7 +3,7 @@
 <?php $link = Request::root(); ?>
 <div class="row jumbotron text-center">
   <h1>Selecteer een dag</h1>
-  <p>U koos <b> {{ $hulpverlenerNaam }} </b></p>
+  <p>U koos <b> {{ $hulpverlenerNaam }} {{ $hulpverlenerAchterNaam }} </b></p>
   <p id="currentDate">  </p>
 </div>
 

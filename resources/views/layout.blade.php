@@ -58,7 +58,6 @@
                   <li><a href="{{ url('/') }}">Home</a></li>
                   <li><a href="{{ url('overzicht') }}">Overzicht</a></li>
                   <li><a href="{{ url('admin') }}">Admin</a></li>
-                  <li><a href="{{ url('admin') }}">Admin</a></li>
                   <li><a href="{{ url('help') }}">Help</a></li>
               </ul>
 
