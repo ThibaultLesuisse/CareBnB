@@ -10,9 +10,9 @@ $(document).ready(function() {
     editable: false,
     theme: true,
     header: {
-      left: 'prev,next today',
+      left: 'Prev,Next Today',
       center: 'Afspraken',
-      right: 'month, agendaWeek, agendaDay'
+      right: 'Month, AgendaWeek, AgendaDay'
     },
     defaultDate: cDate,
     defaultView: 'agendaWeek',

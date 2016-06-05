@@ -46,6 +46,7 @@ Route::group(['prefix' => 'admin'], function()
 
 Route::get('/', 'BookingController@getIndex');
 Route::get('/overzicht', 'overzichtcontroller@index');
+Route::get('/afspraken', 'overzichtcontroller@afspraken');
 Route::controller('booking', 'BookingController');
 Route::controller('admin', 'AdminController');
 Route::auth();

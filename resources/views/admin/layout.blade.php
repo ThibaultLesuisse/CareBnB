@@ -6,7 +6,7 @@
     <link href="{{ asset('/css/jquery-ui.min.css') }}" rel="stylesheet">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
   <link href="{{ asset('/css/calendar.css') }}" rel="stylesheet">
-  <link href="{{ asset('/css/paper.css') }}" rel="stylesheet">
+  <link href="{{ asset('/css/yeti.css') }}" rel="stylesheet">
 
 
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
@@ -36,7 +36,6 @@
         <ul class="nav navbar-nav">
           <li><a href="{{ url('admin/appointments') }}">Afspraken<span class="sr-only">(current)</span></a></li>
           <li><a href="{{ url('admin/availability') }}">Beschikbaar</a></li>
-          <li><a href="{{ url('admin/packages') }}">Hulpverleners</a></li>
           <li><a href="{{ url('admin/configuration') }}">Opties</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">

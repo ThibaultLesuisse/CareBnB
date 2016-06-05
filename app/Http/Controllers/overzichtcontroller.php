@@ -52,9 +52,9 @@ class overzichtcontroller extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function afspraken()
     {
-        //
+        return view('afspraken');
     }
 
     /**
