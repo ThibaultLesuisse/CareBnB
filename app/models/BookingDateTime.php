@@ -20,6 +20,12 @@ class BookingDateTime extends Model implements AuthenticatableContract {
       'userID' => $userid
   	]);
   }
+  public static function addAvailability($paramDate)
+  {
+  	BookingDateTime::create([
+  		'booking_datetime' => $paramDate
+  	]);
+  }
 
   public function scopeTimeBetween($query, $begin, $end) {
     return $query->where('booking_datetime', '>=', $begin)->where('booking_datetime', '<', $end);
