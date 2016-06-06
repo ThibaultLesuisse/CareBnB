@@ -15,7 +15,7 @@
   <link href="{{ asset('/css/yeti.css') }}" rel="stylesheet">
   <link href="{{ asset('/css/core.css') }}" rel="stylesheet">
   <link href="{{ asset('/css/normalize.css') }}" rel="stylesheet">
-  <link href="http://mattlewis92.github.io/angular-bootstrap-calendar/dist/css/angular-bootstrap-calendar.min.css" rel="stylesheet">
+  <link href="https://mattlewis92.github.io/angular-bootstrap-calendar/dist/css/angular-bootstrap-calendar.min.css" rel="stylesheet">
   <!-- Datepicker css -->
   <link href="{{ asset('/css/datepicker.css') }}" rel="stylesheet">
   <link href="{{ asset('/css/calendar.css') }}" rel="stylesheet">
@@ -24,7 +24,7 @@
   <script src="{{ asset('/js/vendor/modernizr.js') }}"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
 
-  <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+  <script src="https://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
 
