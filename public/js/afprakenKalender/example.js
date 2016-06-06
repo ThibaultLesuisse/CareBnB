@@ -1,38 +1,17 @@
 angular.module('mwl.calendar.docs', ['mwl.calendar', 'ngAnimate', 'ui.bootstrap']);
 angular
   .module('mwl.calendar.docs') //you will need to declare your module with the dependencies ['mwl.calendar', 'ui.bootstrap', 'ngAnimate']
-  .controller('KitchenSinkCtrl', function(moment, alert) {
+  .controller('KitchenSinkCtrl', function(moment, alert, $http) {
 
     var vm = this;
 
     //These variables MUST be set as a minimum for the calendar to work
     vm.calendarView = 'month';
     vm.viewDate = new Date();
-    vm.events = [
-      {
-        title: 'An event',
-        type: 'warning',
-        startsAt: moment().startOf('week').subtract(2, 'days').add(8, 'hours').toDate(),
-        endsAt: moment().startOf('week').add(1, 'week').add(9, 'hours').toDate(),
-        draggable: true,
-        resizable: true
-      }, {
-        title: '<i class="glyphicon glyphicon-asterisk"></i> <span class="text-primary">Another event</span>, with a <i>html</i> title',
-        type: 'info',
-        startsAt: moment().subtract(1, 'day').toDate(),
-        endsAt: moment().add(5, 'days').toDate(),
-        draggable: true,
-        resizable: true
-      }, {
-        title: 'This is a really long event title that occurs on every year',
-        type: 'important',
-        startsAt: moment().startOf('day').add(7, 'hours').toDate(),
-        endsAt: moment().startOf('day').add(19, 'hours').toDate(),
-        recursOn: 'year',
-        draggable: true,
-        resizable: true
-      }
-    ];
+    vm.events =  $http.get('http://rest-service.guides.spring.io/greeting').
+        success(function(data) {
+            $scope.greeting = data;
+        });;
 
     vm.isCellOpen = true;
 
