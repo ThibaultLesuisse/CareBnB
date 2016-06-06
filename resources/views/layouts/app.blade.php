@@ -65,8 +65,8 @@
                     @if (Auth::guest() != true && Auth::user()->type != "Hulpverlener" )
                       <li><a href="{{ url('overzicht') }}">Overzicht</a></li>
                       <li><a href="{{ url('afspraken') }}">Afspraken</a></li>
-                    @elseif (Auth::guest() != true && Auth::user()->type != "Hulpverlener" )
-                      <li><a href="{{ url('overzicht') }}">Overzicht</a></li>
+                    @elseif (Auth::guest() != true && Auth::user()->type == "Hulpverlener" )
+                    
                     <li><a href="{{ url('admin') }}">Admin</a></li>
                     @endif
                     <li><a href="{{ url('help') }}">Help</a></li>

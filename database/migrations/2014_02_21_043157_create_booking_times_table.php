@@ -14,6 +14,7 @@ class CreateBookingTimesTable extends Migration {
 	{
     Schema::create('booking_times', function($table) {
       	$table->increments('id');
+				$table->interger('userID');
         $table->date('booking_date');
         $table->time('booking_time');
         $table->timestamps();

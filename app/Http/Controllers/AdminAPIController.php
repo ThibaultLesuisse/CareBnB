@@ -14,7 +14,7 @@ use App\Models\Appointment;
 use App\Models\Customer;
 use App\Models\BookingDateTime;
 use App\Models\Package;
-use App\User;
+use App\Models\User;
 use App\hulpverleners;
 use App\Models\Configuration;
 

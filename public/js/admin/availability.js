@@ -44,7 +44,7 @@ $(document).ready(function() {
             $('#calendar').fullCalendar('refetchEvents');
           },
           error: function(data) {
-            alert(data.responseText);
+            console.log(data.responseText);
           },
           dataType: "json",
         });
