@@ -126,7 +126,7 @@ class BookingController extends Controller
     $info = Session::get('appointmentInfo');
     $startTime = new DateTime($info['datetime']);
     $endTime = new DateTime($info['datetime']);
-    date_add($endTime, date_interval_create_from_date_string('1800 seconds');
+    date_add($endTime, date_interval_create_from_date_string('1800 seconds'));
     $startTime = $startTime->format('Y-m-d H:i');
     $endTime = $endTime->format('Y-m-d H:i');
 
