@@ -86,11 +86,10 @@ class BookingController extends Controller
   {
 
     $input = Input::all();
-    $hulpverlener = hulpverleners::find(Session::get('hulpverlener_id'));
+    $hulpverlener = User::find(Session::get('userID'));
     $appointmentInfo = [
-      "hid"   => Session::get('hulpverlener_id'),
-      "hulpverlener_naam" => $hulpverlener->voornaam,
-      "hulpverlener_tijd" => $hulpverlener->hulpverlener_tijd,
+      "hid"   => Session::get('userID'),
+      "hulpverlener_naam" => $hulpverlener->name,
       "datetime"     => Session::get('selection'),
       "fname"        => $input['fname'],
       "lname"        => $input['lname'],
@@ -101,7 +100,7 @@ class BookingController extends Controller
 
     Session::put('appointmentInfo', $appointmentInfo);
 
-    //Check if newsletterbox is checked, then add shit to database
+
     if(isset($input['newsletterBox'])) {
       Session::put('updates', '1');
     } else {
@@ -127,28 +126,14 @@ class BookingController extends Controller
     $info = Session::get('appointmentInfo');
     $startTime = new DateTime($info['datetime']);
     $endTime = new DateTime($info['datetime']);
-    date_add($endTime, date_interval_create_from_date_string($info['hulpverlener_tijd'].' hours'));
-    $newCustomer = Customer::addCustomer();
+    date_add($endTime, date_interval_create_from_date_string('1800 seconds');
     $startTime = $startTime->format('Y-m-d H:i');
     $endTime = $endTime->format('Y-m-d H:i');
 
     // Create the appointment with this new customer id
-    Appointment::addAppointment($newCustomer);
+    Appointment::addAppointment(Session::get('userID'));
 
     if ($overlapDays) {
-      // Remove hours up to the last hour of the day, then continue to the next day
-      // If necessary
-
-      // PSEUDO CODE
-      // We will get the last appointment of the day and see if it's smaller than the package time
-
-      // If the last appointment occurs beyond the package duration, we delete like normal
-
-      // If the last appointment occurs before the package duration
-      // We subtract the hours we remove from the package duration to get remaining time
-      // Then we go to the next day with appointment times and remove enough appointments
-      // To make clearance for the package duration.
-
     } else {
       // Remove all dates conflicting with the appointment duration
       BookingDateTime::timeBetween($startTime, $endTime)->delete();

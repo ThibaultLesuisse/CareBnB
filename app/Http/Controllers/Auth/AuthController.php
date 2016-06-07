@@ -52,7 +52,7 @@ class AuthController extends Controller
             'type' => 'required',
             'categorie' => 'required',
             'telefoonnummer' => 'required',
-            'adres' => 'required'
+            'adres' => 'required',
         ]);
     }
 
@@ -72,7 +72,7 @@ class AuthController extends Controller
             'type' => $data['type'],
             'categorie' => $data['categorie'],
             'telefoonnummer' => $data['telefoonnummer'],
-            'adres' => $data['adres']
+            'adres' => $data['adres'],
 
         ]);
     }

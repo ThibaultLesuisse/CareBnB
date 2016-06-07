@@ -15,14 +15,6 @@ class Appointment extends Model implements AuthenticatableContract{
     protected $fillable = array('userID', 'appointment_type', 'appointment_datetime');
     protected $guarded = array('id', 'created_at', 'updated_at');
 
-    /**
-     * Customer relation
-     * Appointment has one customer
-     */
-    public function customer()
-    {
-      return $this->hasOne('App\models\Customer', 'id', 'userID');
-    }
 
     public static function addAppointment($userID) {
       $info = Session::get('appointmentInfo');
